@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+  master:
+    container_name: "${COMPOSE_PROJECT_NAME:-citus}_master"
+    image: 'citusdata/citus:9.2.2'
+    ports: 
+      - "${MASTER_EXTERNAL_PORT:-25432}:5432"
+    labels:
+      - "com.citusdata.role=Master"
+    #environment:
+      #- POSTGRES_USER=${POSTGRES_USER}
+      #- POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      #- POSTGRES_DB=${POSTGRES_DB}
+    #volumes:
+      # volumesで./initdbにあるsqlとshをdocker-entrypoint-initdb.dにマウント
+      # docker-entrypoint-initdb.d置いてあるsql,shは、起動時に自動実行される
+      # init直下のファイルは、頭に付けた番号順で実行される
+      #- ${PWD}/postgresql/data:/var/lib/postgresql/data
+      #- ${PWD}/initdb:/docker-entrypoint-initdb.d
+      
+  worker:
+    image: 'citusdata/citus:9.2.2'
+    labels:
+      - "com.citusdata.role=Worker"
+    depends_on:
+      - manager
+         # - condition: 'service_healthy'
+    #entrypoint: ./wait-for-it.sh db:5432
+  manager:
+    container_name: "${COMPOSE_PROJECT_NAME:-citus}_manager"
+    #image: 'citusdata/membership-manager:0.2.1'
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock'
+      - ".:/usr/src/app"
+    depends_on: 
+      - master 
+        #- condition: 'service_healthy'
+    #entrypoint: /wait-for-it/wait-for-it.sh master:5432
+    #entrypoint: "/usr/src/app/wait-for-it/wait-for-it.sh master:5432 -t 10"
