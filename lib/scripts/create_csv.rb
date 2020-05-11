@@ -4,7 +4,7 @@ require 'csv'
 
 PREFIX = "AA"
 
-CSV.open('lib/csv/accession_file.csv', 'w') do |csv|
+CSV.open('../csv/accession_file.csv', 'w') do |csv|
 
   csv << ["management_id", "accession", "agent", "version", "status", "visivility", "created_at", "updated_at", "published_at", "deleted_at"]
   # 十万
