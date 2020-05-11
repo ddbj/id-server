@@ -4,6 +4,12 @@
 
 FROM python:3-alpine
 
+
+RUN rm -rf /var/cache/apk/* && \
+    rm -rf /tmp/*
+
+RUN apk update
+
 RUN apk add --no-cache \
             --virtual psycodeps \
         gcc \
