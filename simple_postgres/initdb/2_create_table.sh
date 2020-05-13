@@ -4,7 +4,7 @@ CREATE TABLE  PREFIX_AR_10 (
   id bigserial NOT NULL,
   accession CHAR(10) NOT NULL,
   agent TEXT NOT NULL,
-  version INT NOT NULL,
+  version VARCHAR(10) NOT NULL,
   status VARCHAR(10) NOT NULL,
   visibility BOOLEAN NOT NULL,
   created_at TIMESTAMP NOT NULL,
