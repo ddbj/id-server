@@ -9,8 +9,7 @@ CREATE TABLE  PREFIX_AR_10 (
   visibility BOOLEAN NOT NULL,
   created_at TIMESTAMP NOT NULL,
   updated_at TIMESTAMP NOT NULL,
-  deleted_at TIMESTAMP,
-  UNIQUE (accession)
+  deleted_at TIMESTAMP
 );
 
 CREATE TABLE PREFIX_MANAGEMENT (

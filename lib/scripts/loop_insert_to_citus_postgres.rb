@@ -11,6 +11,7 @@ end
 
 connection = PG::connect(:host => "localhost", :user => "postgres", :password => "postgres", :dbname => "ddbj", :port => "25432")
 
+=begin
 # insert
 insert_result = Benchmark.realtime do
   number.times {|i|
@@ -20,8 +21,20 @@ insert_result = Benchmark.realtime do
   }
 end
 puts "insert time of #{number} : #{insert_result.to_s}"
+=end
 
-# select
+# select by id
+select_result = Benchmark.realtime do
+  number.times {|i|
+    result = connection.exec(
+        "SELECT * FROM  prefix_ar_10 WHERE id = '#{i}';"
+    )
+  }
+end
+puts "select by id time of #{number} : #{select_result.to_s}"
+
+=begin
+# select by accession
 select_result = Benchmark.realtime do
   number.times {|i|
     result = connection.exec(
@@ -29,4 +42,5 @@ select_result = Benchmark.realtime do
     )
   }
 end
-puts "select time of #{number} : #{select_result.to_s}"
+puts "select by accession time of #{number} : #{select_result.to_s}"
+=end
