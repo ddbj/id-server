@@ -3,7 +3,7 @@ require "bundler/setup"
 require 'benchmark'
 require 'pg'
 
-number = 1000;
+number = 1000000;
 
 insert_sql = ""
 select_sql = ""
@@ -21,7 +21,7 @@ connection = PG::connect(:host => "localhost", :user => "postgres", :password =>
 # create index on accession
 index_result = Benchmark.realtime do
   connection.exec(
-      "CREATE INDEX prefix_ar_10_id_index ON prefix_ar_10(id);"
+      "CREATE UNIQUE INDEX accession_index ON prefix_ar_10 (accession);"
   )
 end
 puts "create index time of #{number} : #{index_result.to_s}"
@@ -29,7 +29,7 @@ puts "create index time of #{number} : #{index_result.to_s}"
 
 # insert
 insert_result = Benchmark.realtime do
-   result = connection.exec(insert_sql)
+   connection.exec(insert_sql)
 end
 puts "insert time of #{number} : #{insert_result.to_s}"
 
