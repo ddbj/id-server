@@ -2,7 +2,7 @@
 psql -U postgres -d ddbj << EOSQL
 CREATE TABLE  PREFIX_AR_10 (
   id bigserial NOT NULL,
-  accession CHAR(10) NOT NULL,
+  accession CHAR(10) NOT NULL primary key,
   agent TEXT NOT NULL,
   version VARCHAR(10) NOT NULL,
   status VARCHAR(10) NOT NULL,
