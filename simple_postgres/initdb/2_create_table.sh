@@ -1,8 +1,8 @@
 #!/bin/bash
 psql -U postgres -d ddbj << EOSQL
 CREATE TABLE  PREFIX_AR_10 (
-  id bigserial NOT NULL,
-  accession CHAR(10) NOT NULL primary key,
+  id bigserial NOT NULL  primary key,
+  accession CHAR(10) NOT NULL,
   agent TEXT NOT NULL,
   version VARCHAR(10) NOT NULL,
   status VARCHAR(10) NOT NULL,
@@ -11,6 +11,8 @@ CREATE TABLE  PREFIX_AR_10 (
   updated_at TIMESTAMP NOT NULL,
   deleted_at TIMESTAMP
 );
+
+CREATE UNIQUE INDEX accession_index ON prefix_ar_10 (accession);
 
 CREATE TABLE PREFIX_MANAGEMENT (
   id bigserial NOT NULL,
