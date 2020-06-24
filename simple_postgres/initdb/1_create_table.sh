@@ -1,5 +1,6 @@
 #!/bin/bash
-psql -U nabe -d ddbj_acc << EOSQL
+psql -U postgres -d ddbj_acc << EOSQL
+
 CREATE TABLE  PREFIX_AR_5 (
   id bigserial NOT NULL,
   accession VARCHAR(7) NOT NULL,
