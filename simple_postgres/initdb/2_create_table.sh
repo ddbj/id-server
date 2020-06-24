@@ -12,7 +12,7 @@ CREATE TABLE  PREFIX_AR_10 (
   deleted_at TIMESTAMP
 );
 
-CREATE UNIQUE INDEX accession_index ON prefix_ar_10 (accession);
+CREATE UNIQUE INDEX prefix_ar_10_accession_index ON prefix_ar_10 (accession);
 
 CREATE TABLE PREFIX_MANAGEMENT (
   id bigserial NOT NULL,

@@ -1,2 +1,12 @@
 # Ignore bundler gems.
 /vendor/
+
+/lib/csv
+
+
+/singularity_simple_postgres/
+/simple_postgres/postgresql/
+
+/sample/
+
+/.idea
