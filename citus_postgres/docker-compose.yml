@@ -18,6 +18,11 @@ services:
       # init直下のファイルは、頭に付けた番号順で実行される
       #- ${PWD}/postgresql/data:/var/lib/postgresql/data
       #- ${PWD}/initdb:/docker-entrypoint-initdb.d
+    deploy:
+      resources:
+        limits:
+          cpus: '5'
+          memory: 200M
       
   worker:
     image: 'citusdata/citus:9.2.2'
@@ -27,6 +32,11 @@ services:
       - manager
          # - condition: 'service_healthy'
     #entrypoint: ./wait-for-it.sh db:5432
+    deploy:
+      resources:
+        limits:
+          cpus: '5'
+          memory: 200M
   manager:
     container_name: "${COMPOSE_PROJECT_NAME:-citus}_manager"
     #image: 'citusdata/membership-manager:0.2.1'
@@ -50,4 +60,9 @@ services:
       - POSTGRES_DB=${POSTGRES_DB}
     ports:
       - "45432:5432"
+    deploy:
+      resources:
+        limits:
+          cpus: '5'
+          memory: 200M
 
