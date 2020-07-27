@@ -15,7 +15,21 @@ services:
       # init直下のファイルは、頭に付けた番号順で実行される
       - ${PWD}/postgresql/data:/var/lib/postgresql/data
       - ${PWD}/initdb:/docker-entrypoint-initdb.d
-
+  benchmark:
+    image: postgres:12.2
+    container_name: "simple_benchmark_postgres"
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    ports:
+      - "35432:5432"
+    #volumes:
+      # volumesで./initdbにあるsqlとshをdocker-entrypoint-initdb.dにマウント
+      # docker-entrypoint-initdb.d置いてあるsql,shは、起動時に自動実行される
+      # init直下のファイルは、頭に付けた番号順で実行される
+      #- ${PWD}/postgresql/data:/var/lib/postgresql/data
+      #- ${PWD}/initdb:/docker-entrypoint-initdb.d
 #volumes:
 #  database:
 #    driver: local
