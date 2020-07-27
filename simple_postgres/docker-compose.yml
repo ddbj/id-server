@@ -15,6 +15,11 @@ services:
       # init直下のファイルは、頭に付けた番号順で実行される
       - ${PWD}/postgresql/data:/var/lib/postgresql/data
       - ${PWD}/initdb:/docker-entrypoint-initdb.d
+    deploy:
+      resources:
+        limits:
+          cpus: '5'
+          memory: 200M
   benchmark:
     image: postgres:12.2
     container_name: "simple_benchmark_postgres"
@@ -30,6 +35,11 @@ services:
       # init直下のファイルは、頭に付けた番号順で実行される
       #- ${PWD}/postgresql/data:/var/lib/postgresql/data
       #- ${PWD}/initdb:/docker-entrypoint-initdb.d
+    deploy:
+      resources:
+        limits:
+          cpus: '5'
+          memory: 200M
 #volumes:
 #  database:
 #    driver: local
