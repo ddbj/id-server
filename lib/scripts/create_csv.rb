@@ -16,7 +16,7 @@ CSV.open('../csv/accession_file.csv', 'w') do |csv|
     else
       status = "Private"
     end
-    sleep(Random.rand(0.1).round(3))
-    csv << [accession, "ddbj", "0.0.1", status, true, Time.now, Time.now]
+    time = (Time.now + Random.rand(0.1).round(3)).strftime("%Y-%m-%d %H:%M:%S")
+    csv << [accession, "ddbj", "0.0.1", status, true, time, time]
   end
 end
