@@ -4,12 +4,13 @@ require 'csv'
 
 PREFIX = "AR"
 
-CSV.open('../csv/accession_file.csv', 'w') do |csv|
+CSV.open('../csv/accession_file2.csv', 'w') do |csv|
 
   csv << ["accession", "agent", "version", "status", "visibility", "created_at", "updated_at"]
   # 1000万
   10000000.times do |num|
-    p num
+    #p num
+    num = num + 10000000
     accession = PREFIX + format('%08d', num)
     if num.even?
       status = "Public"
