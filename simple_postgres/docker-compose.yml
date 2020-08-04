@@ -27,14 +27,10 @@ services:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=${POSTGRES_DB}
+    volumes:
+      - ${PWD}/postgresql/12/bin:/var/lib/postgresql/12/bin
     ports:
       - "35432:5432"
-    #volumes:
-      # volumesで./initdbにあるsqlとshをdocker-entrypoint-initdb.dにマウント
-      # docker-entrypoint-initdb.d置いてあるsql,shは、起動時に自動実行される
-      # init直下のファイルは、頭に付けた番号順で実行される
-      #- ${PWD}/postgresql/data:/var/lib/postgresql/data
-      #- ${PWD}/initdb:/docker-entrypoint-initdb.d
     deploy:
       resources:
         limits:
