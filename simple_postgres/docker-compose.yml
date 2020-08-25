@@ -9,6 +9,7 @@ services:
       - POSTGRES_DB=${POSTGRES_DB}
     ports:
       - "15432:5432"
+    user: 1000:1000
     volumes:
       # volumesで./initdbにあるsqlとshをdocker-entrypoint-initdb.dにマウント
       # docker-entrypoint-initdb.d置いてあるsql,shは、起動時に自動実行される
