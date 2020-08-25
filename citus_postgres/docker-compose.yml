@@ -9,7 +9,7 @@ services:
     labels:
       - "com.citusdata.role=Master"
     #user: 4978:10652
-    user: 1000:1000
+    #user: 1000:1000
     #environment:
       #- POSTGRES_USER=${POSTGRES_USER}
       #- POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
@@ -18,7 +18,7 @@ services:
       # volumesで./initdbにあるsqlとshをdocker-entrypoint-initdb.dにマウント
       # docker-entrypoint-initdb.d置いてあるsql,shは、起動時に自動実行される
       # init直下のファイルは、頭に付けた番号順で実行される
-      - ${PWD}/postgresql/data:/var/lib/postgresql/data
+      #- ${PWD}/postgresql/data:/var/lib/postgresql/data
       #- ${PWD}/initdb:/docker-entrypoint-initdb.d
     deploy:
       resources:
