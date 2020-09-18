@@ -14,7 +14,7 @@ services:
       # volumesで./initdbにあるsqlとshをdocker-entrypoint-initdb.dにマウント
       # docker-entrypoint-initdb.d置いてあるsql,shは、起動時に自動実行される
       # init直下のファイルは、頭に付けた番号順で実行される
-      #- ${PWD}/postgresql/data:/var/lib/postgresql/data
+      - ${PWD}/postgresql/data:/var/lib/postgresql/data
       - ${PWD}/initdb:/docker-entrypoint-initdb.d
     deploy:
       resources:
