@@ -4,7 +4,7 @@ services:
   master:
     container_name: "${COMPOSE_PROJECT_NAME:-citus}_master"
     image: 'citusdata/citus:9.2.2'
-    ports: 
+    ports:
       - "${MASTER_EXTERNAL_PORT:-25432}:5432"
     labels:
       - "com.citusdata.role=Master"
@@ -12,7 +12,7 @@ services:
       #- POSTGRES_USER=${POSTGRES_USER}
       #- POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       #- POSTGRES_DB=${POSTGRES_DB}
-    volumes:
+    #volumes:
       # volumesで./initdbにあるsqlとshをdocker-entrypoint-initdb.dにマウント
       # docker-entrypoint-initdb.d置いてあるsql,shは、起動時に自動実行される
       # init直下のファイルは、頭に付けた番号順で実行される
@@ -32,6 +32,8 @@ services:
       - manager
          # - condition: 'service_healthy'
     #entrypoint: ./wait-for-it.sh db:5432
+    volumes:
+      - '${PWD}/postgresql.conf:/var/lib/postgresql/data/postgresql.conf'
     deploy:
       resources:
         limits:
